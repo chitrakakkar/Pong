@@ -66,13 +66,12 @@ public class Main
         public void paintComponent(Graphics g)
         {
             super.paintComponent(g);
-            g.setColor(Color.magenta);
+            // Chitra-> Q1-Advance Lab
+            g.setColor(Color.magenta);// this would display the instruction in magenta color
             //System.out.println("* Repaint *");
-
             if (gameOver == true)
             {
-                //System.out.println("No. of game the computer won" + getGameWinner().get("Computer"));
-                //System.out.println("No. of game the Human won" + getGameWinner().get("Human"));
+                // draws the winner on the panel-Chitra-> Q3
                 g.drawString("No. of game the computer won" + getGameWinner().get("Computer"),20,70);
                 g.drawString("No. of game the Human won" + getGameWinner().get("Human"),20,90);
 
@@ -91,7 +90,7 @@ public class Main
 
             }
 
-            g.setColor(Color.ORANGE);
+            g.setColor(Color.ORANGE); // changed the color of the ball-Chitra-> Q2
             //g.fillOval((int)ballX, (int)ballY, ballSize, ballSize);
 
             //While game is playing, these methods draw the ball, paddles, using the global variables
@@ -100,7 +99,7 @@ public class Main
             //Ball - a circle is just an oval with the height equal to the width
             g.drawOval((int)ballX, (int)ballY, ballSize, ballSize);
             //Computer paddle
-            g.fillOval((int)ballX, (int)ballY, ballSize, ballSize);
+            g.fillOval((int)ballX, (int)ballY, ballSize, ballSize); // fills the fall-> Q2
             g.drawLine(paddleDistanceFromSide, computerPaddleY - paddleSize, paddleDistanceFromSide, computerPaddleY + paddleSize);
             //Human paddle
             g.drawLine(screenSize - paddleDistanceFromSide, humanPaddleY - paddleSize, screenSize - paddleDistanceFromSide, humanPaddleY + paddleSize);
@@ -138,12 +137,12 @@ public class Main
                 System.out.println("up key");
                 moveUp();
             }
+            // Chitra-> a method to restart the game
+            // Q3-> restart the game
             if(ev.getKeyCode() == KeyEvent.VK_ENTER)
 
             {
-//                Graphics g= null;
-//               g.drawString(" Pong! Press up or down to move", 20, 30);
-//               g.drawString("Press q to quit", 20, 60);
+
                 RestartTheGame();
             }
             //ev.getComponent() returns the GUI component that generated this event
@@ -168,9 +167,10 @@ public class Main
                 humanPaddleY-=humanPaddleMaxSpeed;
             }
         }
+        // method definition-Chitra-Q3
         public void RestartTheGame()
         {
-            removeInstructions = false;
+            removeInstructions = false; // prints the instrcutions again
             timer.start();
             ballX = screenSize / 2;   //Imagine the ball is in a square box. These are the coordinates of the top of that box.
             ballY = screenSize / 2;
@@ -181,6 +181,7 @@ public class Main
 
     public static void main(String[] args)
     {
+        // Initializing a hashmap to get the score for human and computer-Chitra-> Q4
         GameWinner.put("Computer",0);
         GameWinner.put("Human",0);
         gamePanel = new GameDisplay();
@@ -273,19 +274,22 @@ public class Main
     if(ballX <= 0 || ballX >= screenSize)
     {
         gameOver = true;
+        /* chitra*/
+        // after loosing the game; basically checks of the ball passes x0 co-ordinate
+        // shows computer lost as the BallX<0 represents the co-ordinate past x0 which is
+        // computer wall
         if (ballX <= 0)// computer has lost
         {
             NoWallHit="Human";
             HumanScores= HumanScores+ 1;
-            GameWinner.put(NoWallHit,HumanScores);
-            System.out.println("Human score "+ GameWinner.get("Human") );
+            GameWinner.put(NoWallHit,HumanScores); // adding data to the hashmap
+
             }
             else
             {
                 NoWallHit = "Computer";
                 ComputerScores = ComputerScores + 1;
-                GameWinner.put(NoWallHit,ComputerScores);
-                System.out.println("Computer score " + GameWinner.get("Computer"));
+                GameWinner.put(NoWallHit,ComputerScores);//adding data to the hashmap
             }
             return;
         }
